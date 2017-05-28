@@ -58,7 +58,7 @@ input[type=text]:focus,textarea:focus {
 }
 
 /* Adjusts for screen width between 351px and 600px */
-@media screen and (max-width: 600px and min-width:351px) {
+@media screen and (max-width: 600px) and (min-width: 351px) {
 	
 	#form_text {
 	font-size:13px;
