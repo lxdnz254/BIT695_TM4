@@ -1,0 +1,47 @@
+<!-- admin page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+<!-- css styles (which can be added to style.css if desired -->
+<style type="text/css">
+
+div.frame {
+	text-align: center;
+	height: 450px;
+	width: 100%;
+	display: block;
+}
+
+#response {
+	border: 0 none;
+	width: 90%;
+	height: 100%;	
+}
+	
+</style>
+<title>Board Game Aficinados - Admin</title>
+	
+</head>
+<body>
+	<header>
+		<h1>Board Game Aficinados - Administration</h1>
+	</header>
+	<main>
+		
+		<section class="content_pages">
+			<!-- Place php files inside iFrame -->
+			<div class="frame">
+			<iframe id="response" name="response" src="player_table.php" alt="Table of Players"></iframe>
+			</div>
+		</section>
+		<footer>
+			<p><i>Board games aficionados</i></p><p>1970-2017</p>
+		</footer>
+	</main>
+</body>
+</html>

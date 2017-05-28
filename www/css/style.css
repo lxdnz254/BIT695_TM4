@@ -6,7 +6,7 @@ Image from
 https://en.wikipedia.org/wiki/Shogun_(2006_board_game)
 */
 body{
-    background-image: url(index_playing_game-900x500.jpg); 
+    background-image: url('../images/index_playing_game-900x500.jpg'); 
     height: 500px;
     width: 900px;
     font-family: Arial, sans-serif;

@@ -1,0 +1,90 @@
+
+/* CSS for the form template */
+
+#form_text {
+	text-align: right;
+}
+
+#register {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form {
+	width:95%;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+}
+
+/* Makes responsive fields. Sets size and field alignment.*/
+input[type=text],[type=email] {
+	
+	width:100%;
+	padding: 5px;
+	border-radius:5px;
+	border:1px solid;
+}
+
+input[type=submit] {
+	
+	text-align: center;
+	margin-bottom: 10px;
+	width:100%;
+	padding: 10px;
+	border-radius:5px;
+	border:1px solid #7ac9b7;
+	background-color: #4180C5;
+	color: aliceblue;
+	font-size:15px;
+	cursor:pointer;
+}
+
+#submit:hover {
+	background-color: black;
+}
+textarea {
+	width:100%;
+	padding: 5px;
+	margin-top: 5px;
+	border:1px solid #7ac9b7;
+	border-radius:5px;
+	margin-bottom: 5px;
+	resize:none;
+}
+input[type=text]:focus,textarea:focus {
+	border-color: #4697e4;
+}
+
+/* Adjusts for screen width between 351px and 600px */
+@media screen and (max-width: 600px and min-width:351px) {
+	
+	#form_text {
+	font-size:13px;
+	}
+	input[type=submit] {
+	padding:5px;
+	}
+	input[type=text],[type=email] {
+	padding: 5px;
+	font-size: 13px;
+	}
+}
+
+/* Adjust for screen sizes below 350px */
+
+@media screen and (max-width: 350px) {
+	
+	input[type=submit]{
+	padding:4px;
+	font-size:12px;
+	}
+	input[type=text],[type=email] {
+	padding: 4px;
+	font-size:12px;
+	}
+	#form_text {
+	font-size:12px;
+	}
+}
