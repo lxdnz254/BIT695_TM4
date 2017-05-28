@@ -1,0 +1,74 @@
+<!-- Table 1 Form Template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="../css/form.css">
+
+</head>
+
+<!--calls to validate.js to check the form on non-html5 compatible browsers. 
+	to test this on HTML5 compliant browsers add 'novalidate' to the form tag -->
+<script type="text/javascript" src="../js/validate.js"></script>
+ 
+<form id="form_box" name="table1" method="POST" enctype="application/x-www-form-urlencoded"
+	action="{{action}}" onsubmit="return checkForm(this)" target="_self"> 
+
+	<table>
+		<!-- All forms title="" entry is error message displayed for invalid entry -->
+		
+		<!-- First name should not be empty and should be a string not a number -->
+		<tr>
+			<td id="form_text">First name: </td>
+			<td>
+				<input type="text" name="firstname" id="first_name" size="35" 
+						maxlength="50" required pattern="[a-zA-Z]+"
+						value="{{firstname}}" title="Please enter letters only!"
+						placeholder="First name" tabindex="4"/>
+			</td>
+		</tr>
+
+		<!-- Last name should not be empty and should be a string not a number -->
+		<tr>
+			<td id="form_text">Family name:</td>
+			<td> 
+				<input type="text" name="familyname" id="family_name" size="35" 
+						maxlength="50" required pattern="[a-zA-Z]+"
+						value="{{familyname}}" title="Please enter letters only!" 
+						placeholder="Family name" tabindex="5"/>
+			</td>
+		</tr>
+
+		<!-- Email address should not be empty and contain one '@' and at least
+			 one fullstop  -->
+		<tr>
+			<td id="form_text">Email address:</td>
+			<td> 
+				<input type="email" name="email" id="e_mail" size="35" maxlength="50" 
+						required value="{{email}}" title="A valid email address is required!"
+						placeholder="Insert a valid email" tabindex="6"/>
+			</td>
+		</tr>
+
+		<!-- Phone number should not be empty and should be a string not a number 
+				pattern will accept +64 7 123 1234, 07-123-1234, 071231234 
+				or 021 123 1234, 027 123 1234, 022-123-1234 or +64 21 123 1234 -->
+		<tr>
+			<td id="form_text">Phone Number:</td>
+			<td> 
+				<input type="text" name="phone" id="phone_num" size="35" maxlength="15" 
+					pattern="^(0|(\+64(\s|-)?)){1}(\d{1}|(21|22|27){1})(\s|-)?\d{3}(\s|-)?\d{4}$" 
+					value="{{phone}}" title="A valid NZ phone or mobile number is required!" 
+					placeholder="09-876-5432" tabindex="7"/>
+			</td>
+		</tr>
+
+	</table>
+
+	<p id="register"><input type="submit" name="submit" 
+						value="{{Register}}" tabindex="8"></p>
+
+</form>
+
+</html>
