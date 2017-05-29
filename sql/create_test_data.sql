@@ -16,7 +16,7 @@ VALUES ('Scrabble', 1, 6), ('Battleships', 2,2), ('Monopoly', 1,6);
 
 -- Create two events for players to join
 -- testing the shcedule table
-INSERT INTO schedule(_event_name, _venue, _date_start, _date_finish,
+INSERT INTO `schedule`(_event_name, _venue, _date_start, _date_finish,
 	_time_start, _time_finish, _boardgameID)
 	VALUES ('Scrabble Championship', 'Dublin Hall', '2017-06-17', '2017-06-18',
 			'15:00:00', '18:00:00', 1),

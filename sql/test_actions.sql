@@ -55,103 +55,17 @@ INSERT INTO board_games(_boardgame, _ownerID, _number_of_players)
 	VALUES ('Game of Life', 5, 4);
 INSERT INTO board_games_assigned(_eventID, _memberID, _position, _date)
 	VALUES (2,5,4,'2017-06-17');
-	
--- Execute DELETE statement
--- DROP the Foriegn key constraint first
-ALTER TABLE board_games
-DROP FOREIGN KEY fk_ownerID;
 
-DELETE a.*, b.*
-FROM players a, board_games b
-WHERE b._ownerID = a._memberID
+-- Delete references to a player in board_games and assigned board games
+-- Execute DELETE statement
+
+
+DELETE a.*, b.*, c.*
+FROM players a,board_games b, board_games_assigned c
+WHERE a._memberID = b._ownerID
+AND b._ownerID = c._memberID
 AND a._memberID = '5';
 
--- Re-enable FOREIGN KEY
-ALTER TABLE board_games
-ADD CONSTRAINT fk_ownerID
-	FOREIGN KEY (_ownerID) 
-		REFERENCES players(_memberID); 
-
--- DELETE event, all scores asociated with event,
--- and all board_games_assigned to event.
-
--- DROP FOREIGN KEYS
-ALTER TABLE `schedule`
-DROP FOREIGN KEY fk_boardgameID;
-
-ALTER TABLE board_games_assigned
-DROP FOREIGN KEY fk_event,
-DROP FOREIGN KEY fk_assigned_member;
-
-ALTER TABLE scores
-DROP FOREIGN KEY fk_eventID,
-DROP FOREIGN KEY fk_member_scoring;
-
--- ADD CASCADE CONSTRAINTS
-ALTER TABLE `schedule`
-ADD CONSTRAINT fk_boardgameID
-	FOREIGN KEY (_boardgameID)
-    	REFERENCES board_games(_boardgameID)
-		ON DELETE CASCADE;
-        
-ALTER TABLE board_games_assigned
-ADD CONSTRAINT fk_event
-	FOREIGN KEY(_eventID)
-    	REFERENCES schedule(_eventID)
-		ON DELETE CASCADE,
-ADD CONSTRAINT fk_assigned_member
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID)
-		ON DELETE CASCADE;
-		
-ALTER TABLE scores
-ADD CONSTRAINT fk_eventID
-	FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID)
-		ON DELETE CASCADE,
-ADD	CONSTRAINT fk_member_scoring
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID)
-		ON DELETE CASCADE;
-
--- DELETE THE EVENTS 
-DELETE a.*
-FROM `schedule` a
-WHERE a._eventID = '3';
-
--- RE-DROP THE CONSTRAINTS
-ALTER TABLE `schedule`
-DROP FOREIGN KEY fk_boardgameID;
-
-ALTER TABLE board_games_assigned
-DROP FOREIGN KEY fk_event,
-DROP FOREIGN KEY fk_assigned_member;
-
-ALTER TABLE scores
-DROP FOREIGN KEY fk_eventID,
-DROP FOREIGN KEY fk_member_scoring;
-
--- RESET CONSTRAINTS BACK TO ORIGINAL
-ALTER TABLE `schedule`
-ADD CONSTRAINT fk_boardgameID
-	FOREIGN KEY (_boardgameID)
-    	REFERENCES board_games(_boardgameID);
-        
-ALTER TABLE board_games_assigned
-ADD CONSTRAINT fk_event
-	FOREIGN KEY(_eventID)
-    	REFERENCES schedule(_eventID),
-ADD	CONSTRAINT fk_assigned_member
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID);
-		
-ALTER TABLE scores
-ADD CONSTRAINT fk_eventID
-	FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID),
-ADD	CONSTRAINT fk_member_scoring
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID);
 
 -- DELETE player, associated board games, and records
 -- of the player in scores, assigned boardgames and events.
@@ -168,100 +82,32 @@ INSERT INTO board_games_assigned(_eventID, _memberID, _position, _date)
 	VALUES (3,6,1,'2017-06-17');
 INSERT INTO scores(_eventID, _memberID, _current_score, _final_score)
 	VALUES (3,6,45,45);
-
--- Bulk delete of a whole user through all tables	
--- Drop Foriegn Key before Deleting	
-ALTER TABLE board_games
-DROP FOREIGN KEY fk_ownerID;
-
-ALTER TABLE `schedule`
-DROP FOREIGN KEY fk_boardgameID;
-
-ALTER TABLE board_games_assigned
-DROP FOREIGN KEY fk_event,
-DROP FOREIGN KEY fk_assigned_member;
-
-ALTER TABLE scores
-DROP FOREIGN KEY fk_eventID,
-DROP FOREIGN KEY fk_member_scoring;
-
--- Re-enable FOREIGN KEY with CASCADE DELETE
-ALTER TABLE board_games
-ADD CONSTRAINT fk_ownerID
-	FOREIGN KEY (_ownerID) 
-		REFERENCES players(_memberID)
-		ON DELETE CASCADE; 
-        
-ALTER TABLE `schedule`
-ADD CONSTRAINT fk_boardgameID
-	FOREIGN KEY (_boardgameID)
-    	REFERENCES board_games(_boardgameID)
-		ON DELETE CASCADE;
-        
-ALTER TABLE board_games_assigned
-ADD CONSTRAINT fk_event
-	FOREIGN KEY(_eventID)
-    	REFERENCES schedule(_eventID)
-		ON DELETE CASCADE,
-ADD CONSTRAINT fk_assigned_member
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID)
-		ON DELETE CASCADE;
-		
-ALTER TABLE scores
-ADD CONSTRAINT fk_eventID
-	FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID)
-		ON DELETE CASCADE,
-ADD	CONSTRAINT fk_member_scoring
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID)
-		ON DELETE CASCADE;
+	
 
 -- NOW Make the delete of the player '6'
-DELETE
-FROM players
-WHERE players._memberID = '6';
+DELETE a.*, b.*, c.*, d.*
+FROM players a,
+	board_games b,
+	board_games_assigned c,
+	scores d
+WHERE a._memberID = b._ownerID
+AND b._ownerID = c._memberID
+AND c._memberID = d._memberID
+AND a._memberID = '6';
 
--- RESET THE FOREIGN KEYS WITHOUT CASCADE
-ALTER TABLE board_games
-DROP FOREIGN KEY fk_ownerID;
+-- DELETE event, all scores asociated with event,
+-- and all board_games_assigned to event.
 
-ALTER TABLE `schedule`
-DROP FOREIGN KEY fk_boardgameID;
 
-ALTER TABLE board_games_assigned
-DROP FOREIGN KEY fk_event,
-DROP FOREIGN KEY fk_assigned_member;
+-- DELETE THE EVENTS  '3'
+DELETE a.*
+FROM `schedule` a
+WHERE a._eventID = '3';
 
-ALTER TABLE scores
-DROP FOREIGN KEY fk_eventID,
-DROP FOREIGN KEY fk_member_scoring;
+-- DELETE THE EVENTS '2'
+DELETE a.*
+FROM `schedule` a
+WHERE a._eventID = '2';
 
--- Re-enable FOREIGN KEY with CASCADE DELETE
-ALTER TABLE board_games
-ADD CONSTRAINT fk_ownerID
-	FOREIGN KEY (_ownerID) 
-		REFERENCES players(_memberID); 
-        
-ALTER TABLE `schedule`
-ADD CONSTRAINT fk_boardgameID
-	FOREIGN KEY (_boardgameID)
-    	REFERENCES board_games(_boardgameID);
-        
-ALTER TABLE board_games_assigned
-ADD CONSTRAINT fk_event
-	FOREIGN KEY(_eventID)
-    	REFERENCES schedule(_eventID),
-ADD	CONSTRAINT fk_assigned_member
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID);
-		
-ALTER TABLE scores
-ADD CONSTRAINT fk_eventID
-	FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID),
-ADD	CONSTRAINT fk_member_scoring
-		FOREIGN KEY (_memberID)
-		REFERENCES players(_memberID);
 
+-- TESTING COMPLETE

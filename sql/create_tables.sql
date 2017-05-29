@@ -2,9 +2,10 @@
 -- Tables will be players, board_games, board_games_assigned,
 -- schedule, scoring
 
--- We will remove ON DELETE CASCADE, and handle deletes through CRUD's
--- checking with 'admin' whether data should be deleted or stored for
--- reference.
+-- It is assumed that database will be of type InnoDB
+
+-- We will use ON DELETE CASCADE to handle deletion of rows, as multiple table deletes
+-- become rather complex code.
 
 -- It is assummed that these tables will be created in the
 -- correct database referenced in any .php files (e.g. connect.php).
@@ -14,8 +15,8 @@
 --
 -- added password and administration fields.
 -- password will be stored with password_hash() function.
--- admin will be one letter to indicate privelege rights
--- of database.
+-- admin will be one letter to indicate privelege rights,
+-- of database. A = Admin, C = current player, H = historic player.
 
 CREATE TABLE players 
 	(
@@ -45,6 +46,7 @@ CREATE TABLE board_games
 	CONSTRAINT fk_ownerID
 		FOREIGN KEY (_ownerID)
 		REFERENCES players(_memberID)
+		ON DELETE CASCADE
 	);
 	
 -- creates the schedule table to store which games are being played where.
@@ -64,6 +66,7 @@ CREATE TABLE `schedule`
 	CONSTRAINT fk_boardgameID
 		FOREIGN KEY (_boardgameID)
 		REFERENCES board_games(_boardgameID)
+		ON DELETE CASCADE
 	);
 
 -- board_games_assigned will be table for who's playing what game.
@@ -77,7 +80,12 @@ CREATE TABLE board_games_assigned
 	_date date,
 	CONSTRAINT fk_event
 		FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID)
+		REFERENCES schedule(_eventID),
+		ON DELETE CASCADE
+	CONSTRAINT fk_assigned_member
+		FOREIGN KEY (_memberID)
+		REFERENCES players(_memberID)
+		ON DELETE CASCADE
 	);
 	
 
@@ -92,5 +100,10 @@ CREATE TABLE scores
 	_final_score int,
 	CONSTRAINT fk_eventID
 		FOREIGN KEY (_eventID)
-		REFERENCES schedule(_eventID)
+		REFERENCES schedule(_eventID),
+		ON DELETE CASCADE
+	CONSTRAINT fk_member_scoring
+		FOREIGN KEY (_memberID)
+		REFERENCES players(_memberID)
+		ON DELETE CASCADE
 	);
