@@ -59,7 +59,7 @@ CREATE TABLE schedule
 	_time_start time,
 	_time_finish time,
 	_boardgameID int NOT NULL,
-	_registered_players int,
+	_registered_players int DEFAULT 0,
 	PRIMARY KEY (_eventID),
 	CONSTRAINT fk_boardgameID
 		FOREIGN KEY (_boardgameID)
@@ -70,18 +70,11 @@ CREATE TABLE schedule
 
 CREATE TABLE board_games_assigned
 	(
+	_eventID int NOT NULL,
 	_memberID int NOT NULL,
-	_boardgameID int NOT NULL,
 	_position int,
 	_notes varchar(1000),
 	_date date,
-	_eventID int NOT NULL,
-	CONSTRAINT fk_memberID
-		FOREIGN KEY (_memberID) 
-		REFERENCES players(_memberID),
-	CONSTRAINT fk_boardgame
-		FOREIGN KEY (_boardgameID)
-		REFERENCES board_games(_boardgameID),
 	CONSTRAINT fk_event
 		FOREIGN KEY (_eventID)
 		REFERENCES schedule(_eventID)
