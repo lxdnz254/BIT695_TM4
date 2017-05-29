@@ -49,7 +49,7 @@ CREATE TABLE board_games
 	
 -- creates the schedule table to store which games are being played where.
 
-CREATE TABLE schedule
+CREATE TABLE `schedule`
 	(
 	_eventID int NOT NULL AUTO_INCREMENT,
 	_event_name varchar(255) NOT NULL,
