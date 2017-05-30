@@ -284,6 +284,7 @@ footer{
     text-align: center;
     color: #c1d1dd;
     background-color: RGBA(13, 83, 117, 1);
+	bottom: -10px;
 }
 
 /* When screen is smaller than 769px wide */
@@ -312,7 +313,8 @@ footer{
 	
 	main {
 		margin-top: 0%;
-		top: 35%;		
+		top: 35%;
+		height: 80%;
 	}
 	
 	nav_page{
@@ -347,7 +349,7 @@ footer{
 	
 	section{
 		width: 60%;
-		top: -100px;
+		top: -170px;
 		right: -18%; 
 		position: relative;
 		
@@ -364,6 +366,7 @@ footer{
 		width: 5%;
 		top: 25%;
 		right: -12%;
+		padding-top: 75px;
 	}
 	
 	#right_bar{
@@ -371,6 +374,7 @@ footer{
 		width: 5%;
 		top: 25%;
 		left: 78%;
+		padding-top: 75px;
 	}
 	
 	#left_semcircle{
@@ -386,6 +390,10 @@ footer{
 		padding-right: 12%;
 		margin-bottom: 1%;
 	}
+
+}	
+/* Alter tables at smaller than 480px */
+@media screen and (max-width: 481px) { 
 	
     table {
         border: 0;
@@ -393,7 +401,13 @@ footer{
 
     table thead {
         display: none;
+		text-align: centre;
     }
+	
+	table th {
+		text-align: centre;
+		
+	}
 
     table tr {
         margin-bottom: 10px;
@@ -442,12 +456,128 @@ footer{
         float: left;
         font-weight: bold;
     }
+	
+	#admin_foot li{
+		width: 10%;
+		
+	}
+	
+	#admin_foot a{
+		font-size: 12px;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+		
 }
 
-/* When screen is larger than 900px wide */
+/* When screen is larger than 1280px wide */
 
-@media screen and (min-width: 900px) {
-	table {
-		width: 80%;
+@media screen and (min-width: 1280px) {
+	
+	body {
+		width: 100%;
+		background-size: 50% 100%;
+		background-repeat: no-repeat;
+		
 	}
+	
+	header {
+		top: 0px;
+		right: 50%;
+		
+	}
+	
+	header h1 {
+		margin-left: 5%;
+	}
+	
+	nav_page {
+		position: absolute;
+		top: 0px;
+		margin-left: 50%;
+		z-index: 100;
+		
+	}
+	
+	main {
+		position: absolute;
+		top: 0px;
+		margin-left: 50%;
+		margin-top: 0px;
+		width: 50%;
+		height: 90%;
+	}
+	
+	#heading{
+		position: relative;
+		top: 36px;
+		
+	}
+	
+	section {
+		width: 55%;
+		top: -100px;
+		
+	}
+	
+	.content_pages{
+		top: 25px;
+	}
+	
+	#right_bar{
+		left: 80%;
+	}
+		
+	#left_semcircle{
+		position: relative;
+		top: 25px;
+		padding-top: 100px;
+		
+		
+	}
+	
+	#right_semcircle{
+		position: relative;
+		top: 25px;
+		padding-top: 100px;
+	}
+	
+	
+	footer{
+		position: absolute;
+		width: 100%;
+		bottom: 0%;
+		height: 10%;
+		
+	}
+	
+	#admin_foot{
+		position: absolute;
+		width: 200%;
+		left: -100%;
+		bottom: 0%;
+		height: 15%;
+	}
+	
+	
+		
+	table {
+		position: relative;
+		top: 20px;
+		width: 100%;
+	}
+}
+
+/* screen above 1900px */
+@media screen and (min-width: 1900px) {
+	
+	footer{
+		height: 40%;
+	}
+	#admin_foot{
+		height: 35%;
+	}
+	
 }
