@@ -286,25 +286,25 @@ footer{
     background-color: RGBA(13, 83, 117, 1);
 }
 
-/* When screen is smaller than 600px wide */
+/* When screen is smaller than 769px wide */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 769px) {
 	
 	body {
 		width: 100%;
-		background-size: 100% 160pt;
+		background-size: 100% 40%;
 		background-repeat: no-repeat;
 	}
 	
 	header {
-		top: 5px;
-		height: 180px;
+		top: 0px;
+		height: 35%;
 	}
 	
 	header h1{
 		top: 20px;    
 		width: 90%;
-		height: 60px;
+		height: 15%;
 		padding: 0px 0px 10px 0px;
 		font-size: 20px;
 		line-height: 35px;
@@ -312,20 +312,16 @@ footer{
 	
 	main {
 		margin-top: 0%;
-		top: 180px;		
+		top: 35%;		
 	}
 	
 	nav_page{
 		
 		
-		top: 70px;
+		top: 110px;
 		width: 80%;
+		overflow: hidden;
 		 
-	}
-	
-	#follow_me {
-		top: 70px;
-		width: 80%;
 	}
 	
 	nav_page li{
@@ -334,6 +330,7 @@ footer{
 	}
 	
 	nav_page a{
+		display: inline;
 		font-size: 12px;
 		padding-top: 5px;
 		padding-bottom: 5px;
