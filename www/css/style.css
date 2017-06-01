@@ -1,5 +1,8 @@
 /* BIT695 Web Technologies */
-html{background: #31393c}
+html{
+	background: #31393c; 
+	
+	}
 
 /*
 Image from
@@ -13,6 +16,7 @@ body{
     color: #0d5375;
     margin-left: auto;
     margin-right: auto;
+	
 }
 
 #home{
@@ -314,7 +318,7 @@ footer{
 	main {
 		margin-top: 0%;
 		top: 35%;
-		height: 80%;
+		/*height: 80%;*/
 	}
 	
 	nav_page{
@@ -457,8 +461,14 @@ footer{
         font-weight: bold;
     }
 	
+	#admin_foot{
+		position: relative;
+	}
+	
 	#admin_foot li{
 		width: 10%;
+		padding: 5px 0px 5px 0px;
+		margin 3px;
 		
 	}
 	
@@ -476,9 +486,11 @@ footer{
 
 @media screen and (min-width: 1280px) {
 	
+	
+	
 	body {
 		width: 100%;
-		background-size: 50% 100%;
+		background-size: cover;
 		background-repeat: no-repeat;
 		
 	}
@@ -554,7 +566,7 @@ footer{
 	}
 	
 	#admin_foot{
-		position: absolute;
+		position: absoulte;
 		width: 200%;
 		left: -100%;
 		bottom: 0%;
@@ -567,6 +579,28 @@ footer{
 		position: relative;
 		top: 20px;
 		width: 100%;
+	}
+	
+	@media screen and (orientation: landscape) and (min-height: 800px) {
+		
+		footer{
+			height: 32%;
+		}
+		
+		#admin_foot{
+			height: 30%;
+		}
+	}
+	
+	@media screen and (orientation: landscape) and (min-height: 950px) {
+		
+		footer{
+			height: 44%;
+		}
+		
+		#admin_foot{
+			height: 44%;
+		}
 	}
 }
 
