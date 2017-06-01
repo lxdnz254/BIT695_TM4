@@ -83,7 +83,7 @@ p{
     margin-top: 0px;
 }
 
-nav_page{     
+nav{     
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -92,7 +92,7 @@ nav_page{
 	  
 }
 
-nav_page li{
+nav li{
     width: 125px;
     text-align: center;
     display: inline;
@@ -101,7 +101,8 @@ nav_page li{
     background: RGBA(13, 83, 117, 1);
 }
 
-admin_nav{
+
+#admin_nav{
 	position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -110,12 +111,12 @@ admin_nav{
     overflow: visible;
 }
 
-admin_nav ul{
+#admin_nav ul{
 	position: relative;
 	margin-left: 0px;
 }
 
-admin_nav li{
+#admin_nav li{
 	width: 25%;
     text-align: center;
     display: inline;
@@ -124,7 +125,7 @@ admin_nav li{
     background: RGBA(13, 83, 117, 1);
 }
 
-admin_nav a{
+#admin_nav a{
     color: #fff;
     font-size: 20px;   
     background: none;
@@ -190,7 +191,7 @@ section{
     margin-right: auto;
 }
 
-nav_page a{
+nav a{
     color: #fff;
     font-size: 20px;   
     background: none;
@@ -209,7 +210,7 @@ a:visited{
     color: RGBA(169, 169, 169, 1);
 }
 
-nav_page li:hover{
+nav li:hover{
     background: RGBA(13, 83, 117, 0.5);
 }
 
@@ -321,21 +322,27 @@ footer{
 		/*height: 80%;*/
 	}
 	
-	nav_page{
+	nav{
 		
-		
+		margin-left: 0%;
 		top: 110px;
-		width: 80%;
+		width: 90%;
 		overflow: hidden;
 		 
 	}
 	
-	nav_page li{
+	#nav_home {
+		top: 100px;
+		
+	}
+		
+	
+	nav li{
 		width: 10%;
 		padding: 10px 0px 10px 0px;
 	}
 	
-	nav_page a{
+	nav a{
 		display: inline;
 		font-size: 12px;
 		padding-top: 5px;
@@ -405,11 +412,11 @@ footer{
 
     table thead {
         display: none;
-		text-align: centre;
+		text-align: center;
     }
 	
 	table th {
-		text-align: centre;
+		text-align: center;
 		
 	}
 
@@ -461,23 +468,44 @@ footer{
         font-weight: bold;
     }
 	
-	#admin_foot{
-		position: relative;
-	}
-	
-	#admin_foot li{
-		width: 10%;
-		padding: 5px 0px 5px 0px;
-		margin 3px;
+	nav {
+		left: -30px;
 		
 	}
 	
-	#admin_foot a{
+	nav li {
+		
+		margin: 2px;
+	}
+	
+	#admin_foot{
+		position: relative;
+		
+	}
+	
+	#admin_nav li{
+		width: 10%;
+		padding: 5px 0px 5px 0px;
+		margin: 3px;
+		
+	}
+	
+	#admin_nav a{
 		font-size: 12px;
 		padding-top: 2px;
 		padding-bottom: 2px;
 		padding-left: 3px;
 		padding-right: 3px;
+	}
+		
+}
+
+@media screen and (max-width: 350px) {
+	
+	#admin_nav {
+		left: -40px;
+		width: 90%;
+		font-size: 12px;
 	}
 		
 }
@@ -505,7 +533,7 @@ footer{
 		margin-left: 5%;
 	}
 	
-	nav_page {
+	nav {
 		position: absolute;
 		top: 0px;
 		margin-left: 50%;
@@ -566,7 +594,7 @@ footer{
 	}
 	
 	#admin_foot{
-		position: absoulte;
+		position: absolute;
 		width: 200%;
 		left: -100%;
 		bottom: 0%;
@@ -581,7 +609,10 @@ footer{
 		width: 100%;
 	}
 	
-	@media screen and (orientation: landscape) and (min-height: 800px) {
+	
+}
+
+@media screen and (min-width: 1280px) and (orientation: landscape) and (min-height: 800px) {
 		
 		footer{
 			height: 32%;
@@ -592,7 +623,7 @@ footer{
 		}
 	}
 	
-	@media screen and (orientation: landscape) and (min-height: 950px) {
+@media screen and (min-width: 1280px) and (orientation: landscape) and (min-height: 950px) {
 		
 		footer{
 			height: 44%;
@@ -600,8 +631,8 @@ footer{
 		
 		#admin_foot{
 			height: 44%;
+			
 		}
-	}
 }
 
 /* screen above 1900px */
