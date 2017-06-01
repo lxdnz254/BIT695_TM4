@@ -1,12 +1,34 @@
 <?php
 
 include('connect.php');
+
+function statement_prep($connection, $sql) {
+	
+	if($stmt = $connection->prepare($sql)) {
+		
+		/*No Bind params */
+		
+		/*execute statement*/
+		$stmt->execute();
+		
+		/*get result*/
+		$result=$stmt->get_result();
+		
+		$stmt->close();
+		
+	} else {
+			$result=null;
+			echo 'Prepared statement error: %s\n'. $connection->error;
+	}
+	
+	return $result;
+}
  
 function select_all($connection, $table) {
 
 	$sql = "select * from {$table}";
-    $result = $connection -> query($sql);
-
+	$result = statement_prep($connection, $sql);	
+	
     return $result;
 }
 
@@ -16,7 +38,7 @@ function select_games($connection, $table, $table2) {
 			{$table2}._family_name FROM {$table} JOIN 
 			{$table2} ON {$table}._ownerID = {$table2}._memberID";
 	
-	$result = $connection -> query($sql);
+	$result = statement_prep($connection, $sql);
 	
 	return $result;
 }
@@ -27,7 +49,7 @@ function select_events($connection, $table, $table2) {
 		{$table} JOIN {$table2} ON {$table2}._boardgameID = 
 			{$table}._boardgameID";
 	
-	$result = $connection -> query($sql);
+	$result = statement_prep($connection, $sql);
 	
 	return $result;
 }
@@ -40,7 +62,7 @@ function select_assign($connection, $table, $table2, $table3) {
 				= {$table}._eventID JOIN {$table3} ON {$table3}._memberID
 				= {$table}._memberID ORDER BY {$table}._eventID, {$table}._position";
 				
-	$result = $connection -> query($sql);
+	$result = statement_prep($connection, $sql);
 	
 	return $result;
 }
@@ -53,7 +75,7 @@ function select_score($connection, $table, $table2, $table3) {
 				= {$table}._eventID JOIN {$table3} ON {$table3}._memberID
 				= {$table}._memberID ORDER BY {$table}._eventID, {$table}._current_score DESC";
 				
-	$result = $connection -> query($sql);
+	$result = statement_prep($connection, $sql);
 	
 	return $result;
 }
