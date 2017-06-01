@@ -9,6 +9,10 @@ $database = "act5";
 $host = '127.0.0.1:3306';
 $table1 = "players";
 $table2 = "board_games";
+$table3 = "board_games_assigned";
+$table4 = "schedule";
+$table5 = "scores";
+
 
 /* create database functions */
 

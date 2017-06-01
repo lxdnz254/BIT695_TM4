@@ -635,7 +635,18 @@ footer{
 		}
 }
 
-/* screen above 1900px */
+/* screen above 1500px */
+@media screen and (min-width: 1500px) {
+	
+	footer{
+		height: 30%;
+	}
+	#admin_foot{
+		height: 30%;
+	}
+	
+}
+
 @media screen and (min-width: 1900px) {
 	
 	footer{
