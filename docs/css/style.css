@@ -401,6 +401,11 @@ footer{
 		padding-right: 12%;
 		margin-bottom: 1%;
 	}
+	
+	footer{
+		position:relative;
+		bottom: -75px;
+	}
 
 }	
 /* Alter tables at smaller than 480px */
@@ -510,6 +515,14 @@ footer{
 		
 }
 
+@media screen and (min-width:769px) {
+	
+	footer{
+		position: relative;
+		bottom: -75px;
+	}
+}
+
 /* When screen is larger than 1280px wide */
 
 @media screen and (min-width: 1280px) {
@@ -550,6 +563,12 @@ footer{
 		height: 90%;
 	}
 	
+	main h2 {
+		position: relative;
+		text-align: center;
+		left: -20%
+	}
+	
 	#heading{
 		position: relative;
 		top: 36px;
@@ -587,8 +606,9 @@ footer{
 	
 	footer{
 		position: absolute;
-		width: 100%;
-		bottom: 0%;
+		width: 400%;
+		bottom: -10%;
+		left: -300%;
 		height: 10%;
 		
 	}
