@@ -566,7 +566,8 @@ footer{
 	main h2 {
 		position: relative;
 		text-align: center;
-		left: -20%
+		left: -20%;
+		top: 40px;
 	}
 	
 	#heading{
@@ -576,13 +577,15 @@ footer{
 	}
 	
 	section {
-		width: 55%;
-		top: -100px;
+		
+		width: 100%;
+		top: 60px;
 		
 	}
 	
 	.content_pages{
 		top: 25px;
+		width: 95%;
 	}
 	
 	#right_bar{
