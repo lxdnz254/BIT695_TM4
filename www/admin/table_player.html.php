@@ -19,7 +19,7 @@ echo '<table><thead>';
 	for($i=0;$i<=4;$i++) {
 	echo '<td style="border: 1px solid black; border-radius: 5px;" data-label="'.$arr[$i].'">&nbsp</td>';
 	}
-	echo '<td id ="do" colspan="2"><a href="show_form.php">Add Player</a></td></tr></tbody>';
+	echo '<td id ="do" colspan="2"><a href="show_form.php?player">Add Player</a></td></tr></tbody>';
 	
  	echo '</table>';
 

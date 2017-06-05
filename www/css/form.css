@@ -41,6 +41,29 @@ input[type=submit] {
 	cursor:pointer;
 }
 
+input[type=checkbox] {
+	float: right;
+}
+
+select {
+	float: right;}
+}
+
+#max_players {
+	float: right;
+	
+}
+
+input[type=number] {
+	
+	width: 20%;
+	float:right;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid;
+	text-align:right;
+}
+
 #submit:hover {
 	background-color: black;
 }
@@ -66,7 +89,7 @@ input[type=text]:focus,textarea:focus {
 	input[type=submit] {
 	padding:5px;
 	}
-	input[type=text],[type=email] {
+	input[type=text],[type=email], [type=number] {
 	padding: 5px;
 	font-size: 13px;
 	}
@@ -80,7 +103,7 @@ input[type=text]:focus,textarea:focus {
 	padding:4px;
 	font-size:12px;
 	}
-	input[type=text],[type=email] {
+	input[type=text],[type=email], [type=number] {
 	padding: 4px;
 	font-size:12px;
 	}

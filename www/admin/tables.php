@@ -1,7 +1,9 @@
 <?php
 
+/* database function */
 include('connect.php');
 
+/* Prepare stements for all tables */
 function statement_prep($connection, $sql) {
 	
 	if($stmt = $connection->prepare($sql)) {
@@ -23,7 +25,8 @@ function statement_prep($connection, $sql) {
 	
 	return $result;
 }
- 
+
+/* sql for the player table */ 
 function select_all($connection, $table) {
 
 	$sql = "select * from {$table}";
@@ -32,6 +35,7 @@ function select_all($connection, $table) {
     return $result;
 }
 
+/* sql for the games table */
 function select_games($connection, $table, $table2) {
 	
 	$sql="SELECT {$table}.*, {$table2}._first_name, 
@@ -43,6 +47,7 @@ function select_games($connection, $table, $table2) {
 	return $result;
 }
 
+/* sql for the events table */
 function select_events($connection, $table, $table2) {
 	
 	$sql = "SELECT {$table}.* , {$table2}._boardgame FROM
@@ -54,6 +59,7 @@ function select_events($connection, $table, $table2) {
 	return $result;
 }
 
+/* sql for the assign table */
 function select_assign($connection, $table, $table2, $table3) {
 	
 	$sql = "SELECT {$table}.* , {$table2}._event_name , 
@@ -67,6 +73,7 @@ function select_assign($connection, $table, $table2, $table3) {
 	return $result;
 }
 
+/*sql for the scores table */
 function select_score($connection, $table, $table2, $table3) {
 	
 	$sql = "SELECT {$table}.* , {$table2}._event_name , 
@@ -80,6 +87,7 @@ function select_score($connection, $table, $table2, $table3) {
 	return $result;
 }
 
+/* Get the player table */
 if (isset($_GET['player'])) {
 // Query the database
 
@@ -91,14 +99,13 @@ if ($result->num_rows > 0) {
  // Output the table
 	include('header.php');
  	include('table_player.html.php');
-	
-	
-	
+		
  } else  echo '0 results';
 
 $conn->close();
 }
 
+/* Get the games table */
 if (isset($_GET['games'])) {
 // Query the database
 
@@ -117,6 +124,7 @@ $conn->close();
 	
 }
 
+/* Get the assign table */
 if (isset($_GET['assign'])) {
 // Query the database
 
@@ -135,6 +143,7 @@ $conn->close();
 	
 }
 
+/* Get the Events table */
 if (isset($_GET['schedule'])) {
 // Query the database
 
@@ -153,6 +162,7 @@ $conn->close();
 	
 }
 
+/* Get the scores table */
 if (isset($_GET['scores'])) {
 // Query the database
 

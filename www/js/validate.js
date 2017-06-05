@@ -58,6 +58,19 @@ function checkForm(form)
 			return false;
 		}
 		
+		// test the board game field
+		if(form.board_game.value == "") {
+			 alert("Error: Board Games must be filled out!");
+			 form.board_game.focus();
+			 return false;
+		}
+		
+		if(!form.board_game.value.match(re)) {
+			alert("Error: Board Game field must contain letters only!");
+			form.board_game.focus();
+			return false;
+		}
+		
 	/*	
 		// Save this for later if we need password validation
 		
