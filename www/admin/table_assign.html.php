@@ -9,8 +9,8 @@ echo '<table><thead>';
 		echo '</td><td data-label="Position">' . $row['_position'];
  		echo '</td><td data-label="Date">' . $row['_date'];
 		echo '</td><td data-label="Notes">' . $row['_notes'];
- 		echo '</td><td id="do"><a href="deleteplayer.php?Player=' . $row['_memberID'] . '">Delete Player</a>';
- 		echo '</td><td id="do"><a href="editplayer.php?Player=' . $row['_memberID'] . '">Edit Player</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?assign=' . $row['_memberID'] . '">Delete Player</a>';
+ 		echo '</td><td id="do"><a href="edit.php?assign=' . $row['_memberID'] . '">Edit Player</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';
@@ -18,7 +18,7 @@ echo '<table><thead>';
 	for($i=0;$i<=4;$i++) {
 	echo '<td style="border: 1px solid black; border-radius: 5px;" data-label="'.$arr[$i].'">&nbsp</td>';
 	}
-	echo '<td id ="do" colspan="2"><a href="show_form.php">Add Player</a></td></tr></tbody>';
+	echo '<td id ="do" colspan="2"><a href="show_form.php?assign">Assign Player</a></td></tr></tbody>';
 	
  	echo '</table>';
 ?>

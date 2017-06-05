@@ -2,6 +2,7 @@
 function checkForm(form)
 	{
 		re = /^[a-zA-Z]+$/;
+		game_re = /^[a-zA-Z][a-zA-Z ]*[a-zA-Z]$/;
 		
 		// test the first_name
 		if(form.first_name.value == "") {
@@ -65,7 +66,7 @@ function checkForm(form)
 			 return false;
 		}
 		
-		if(!form.board_game.value.match(re)) {
+		if(!form.board_game.value.match(game_re)) {
 			alert("Error: Board Game field must contain letters only!");
 			form.board_game.focus();
 			return false;

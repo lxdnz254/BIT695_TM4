@@ -9,8 +9,8 @@ echo '<table><thead>';
 		
 		echo '</td><td data-label="InPlay"><input type="checkbox" ' . ($row['_playing'] == 1 ? 'checked="checked"' :'').' value="0" disabled/>';
  		echo '</td><td data-label="MaxPlayers">' . $row['_number_of_players'];
- 		echo '</td><td id="do"><a href="deletegame.php?game=' . $row['_boardgameID'] . '">Delete Game</a>';
- 		echo '</td><td id="do"><a href="editgame.php?game=' . $row['_boargameID'] . '">Edit Game</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?game=' . $row['_boardgameID'] . '">Delete Game</a>';
+ 		echo '</td><td id="do"><a href="edit.php?game=' . $row['_boardgameID'] . '">Edit Game</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';

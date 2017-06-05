@@ -1,8 +1,7 @@
 <?php
 
 function replace_tags($template, $placeholders){
-    $placeholders = array_merge($placeholders, array('<?'=>'<?', '?>'=>'?>'));
-	
+    	
     return str_replace(array_keys($placeholders), $placeholders, $template);
 }
 

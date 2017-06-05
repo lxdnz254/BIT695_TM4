@@ -10,8 +10,8 @@ echo '<table><thead>';
  		echo '</td><td data-label="Finish">' . timeset($row['_date_finish'], $row['_time_finish']);
 		echo '</td><td data-label="Game">' . $row['_boardgame'];
 		echo '</td><td data-label="Entered">' . $row['_registered_players'];
- 		echo '</td><td id="do"><a href="deleteevent.php?event=' . $row['_eventID'] . '">Delete Event</a>';
- 		echo '</td><td id="do"><a href="editevent.php?event=' . $row['_eventID'] . '">Edit Event</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?event=' . $row['_eventID'] . '">Delete Event</a>';
+ 		echo '</td><td id="do"><a href="edit.php?event=' . $row['_eventID'] . '">Edit Event</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';
@@ -19,7 +19,7 @@ echo '<table><thead>';
 	for($i=0;$i<=5;$i++) {
 	echo '<td style="border: 1px solid black; border-radius: 5px;" data-label="'.$arr[$i].'">&nbsp</td>';
 	}
-	echo '<td id ="do" colspan="2"><a href="show_form.php">Add Event</a></td></tr></tbody>';
+	echo '<td id ="do" colspan="2"><a href="show_form.php?event">Add Event</a></td></tr></tbody>';
 	
  	echo '</table>';
 	

@@ -10,8 +10,8 @@ echo '<table><thead>';
 		echo '</td><td data-label="Family Name">' . $row['_family_name'];
  		echo '</td><td data-label="Email">' . $row['_email'];
 		echo '</td><td data-label="Phone">' . $row['_phone'];
- 		echo '</td><td id="do"><a href="deleteplayer.php?Player=' . $row['_memberID'] . '">Delete Player</a>';
- 		echo '</td><td id="do"><a href="editplayer.php?Player=' . $row['_memberID'] . '">Edit Player</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?Player=' . $row['_memberID'] . '">Delete Player</a>';
+ 		echo '</td><td id="do"><a href="edit.php?Player=' . $row['_memberID'] . '">Edit Player</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';

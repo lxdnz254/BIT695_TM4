@@ -137,7 +137,7 @@ if (isset($_GET['games'])) {
 		$boardGame = $_POST['boardgame'];
 	/* 	check the "boardGame" */
 	if ($boardGame != null) {
-		$result = checkName($boardGame);
+		$result = checkGame($boardGame);
 		if (!$result) {
 			echo "board game not valid.";
 			exit;

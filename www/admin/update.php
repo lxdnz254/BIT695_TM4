@@ -99,7 +99,7 @@ if ($stmt = $conn->prepare("UPDATE "."$table1"
 						
 						/* Close the statement */
 						$stmt->close();
-						header('Location: player_table.php');
+						header('Location: tables.php?player');
 					}
 					else
 					{

@@ -24,7 +24,7 @@
 			<td id="form_text">Game: </td>
 			<td>
 				<input type="text" name="boardgame" id="board_game" size="35" 
-						maxlength="50" required pattern="[a-zA-Z]+"
+						maxlength="50" required pattern="^[a-zA-Z][a-zA-Z ]*[a-zA-Z]$"
 						value="{{game}}" title="Please enter letters only!"
 						placeholder="Board game name" tabindex="4"/>
 			</td>
