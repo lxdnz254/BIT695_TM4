@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" href="../css/form.css">
+	
 
 </head>
 
@@ -13,7 +14,7 @@
 	to test this on HTML5 compliant browsers add 'novalidate' to the form tag -->
 <script type="text/javascript" src="../js/validate.js"></script>
  
-<form id="form_box" name="game" method="POST" enctype="application/x-www-form-urlencoded"
+<form id="form_box" name="event" method="POST" enctype="application/x-www-form-urlencoded"
 	action="{{action}}" onsubmit="return checkForm(this)" target="_self"> 
 
 	<table>

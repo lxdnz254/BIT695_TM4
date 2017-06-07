@@ -170,6 +170,7 @@ if (isset($_GET['assign'])) {
 		echo 'Error getting database information'; 
 		exit();
 		}
+		
 	// Second sql array	
 	$sql = "SELECT t._eventID, t._event_name
 			FROM {$table4} t ";
@@ -192,6 +193,8 @@ if (isset($_GET['assign'])) {
 
 	/*create the output from the template */
 	$vars = array('{{notes}}'=>'',
+				'{{position}}'=>'',
+				'{{date}}'=>'2017-06-01',
 				'{{Register}}'=>'Assign Player',
 				'{{action}}'=>'add.php?assign');
 					
@@ -228,7 +231,7 @@ if (isset($_GET['scores'])) {
 		echo 'Error getting database information'; 
 		exit();
 		}
-	
+		
 	// Second sql array
 	$sql = "SELECT _eventID, _event_name FROM {$table4}";
 
@@ -237,7 +240,7 @@ if (isset($_GET['scores'])) {
 	if ($result->num_rows > 0) {
 		
 		foreach($result as $row) {
-			$players[] = array('id' => $row['_memberID'], 'name' => $row['_first_name'].' '.$row['_family_name']);
+			$events[] = array('id' => $row['_eventID'], 'event' => $row['_event_name']);
 		}
 		
 	} else {
@@ -249,7 +252,8 @@ if (isset($_GET['scores'])) {
 	$conn->close();
 
 	/*create the output from the template */
-	$vars = array('{{game}}'=>'',
+	$vars = array('{{curscore}}'=>'',
+				'{{finscore}}'=>'',
 				'{{Register}}'=>'Add Score',
 				'{{action}}'=>'add.php?scores');
 					

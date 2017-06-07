@@ -18,6 +18,10 @@ form {
 	display: inline-block;
 }
 
+table {
+	width:98%
+}
+
 /* Makes responsive fields. Sets size and field alignment.*/
 input[type=text],[type=email] {
 	
@@ -66,6 +70,12 @@ select {
 	
 }
 
+#notes {
+	float:right;
+	width: 90%;
+	height: 50px;
+	
+}
 
 input[type=number] {
 	
