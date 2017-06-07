@@ -165,7 +165,7 @@ if (isset($_GET['games'])) {
 		$playing = true;
 	} else {$playing = false; }
 	
-	// recieves the maximum player value
+	// receives the maximum player value
 		if (isset($_POST['max_players'])) {
 			$maxPlayer = $_POST['max_players'];
 			if ($maxPlayer == null) {
@@ -210,6 +210,196 @@ $conn->close();
 
 /* Add an event */
 if (isset($_GET['event'])) {
+	
+/* validate posted variables and perform the sql insert */
+	
+	/* check the boardgame value */
+	if (isset($_POST['boardgame'])) {
+		$boardGame = $_POST['boardgame'];
+	/* 	check the "boardGame" */
+	if ($boardGame != null) {
+		$result = is_numeric($boardGame);
+		if (!$result) {
+			echo "board game not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "board game not recieved";
+		exit;
+	}
+} else {
+	echo "board game not posted"; 
+	exit;
+	}
+	
+	/* check the eventname */
+	if (isset($_POST['eventname'])) {
+		$eventName = $_POST['eventname'];
+	/* 	check the "venueName" */
+	if ($eventName != null) {
+		$result = checkGame($eventName);
+		if (!$result) {
+			echo "Event name not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Event name not received";
+		exit;
+	}
+} else {
+	echo "Event name not posted"; 
+	exit;
+	}
+	
+	/* check the venuename */
+	if (isset($_POST['venuename'])) {
+		$venueName = $_POST['venuename'];
+	/* 	check the "venueName" */
+	if ($venueName != null) {
+		$result = checkGame($venueName);
+		if (!$result) {
+			echo "Venue name not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Venue name not received";
+		exit;
+	}
+} else {
+	echo "Venue name not posted"; 
+	exit;
+	}
+	
+	/* check the Start date */
+	if (isset($_POST['dstart'])) {
+		$dateStart = $_POST['dstart'];
+	/* 	check the "dateStart" */
+	if ($dateStart != null) {
+		$result = validateDate($dateStart);
+		if (!$result) {
+			echo "Start date not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Start date not received";
+		exit;
+	}
+} else {
+	echo "Start date not posted"; 
+	exit;
+	}
+	
+	/* check the Finish date */
+	if (isset($_POST['dfinish'])) {
+		$dateFinish = $_POST['dfinish'];
+	/* 	check the "dateFinish" */
+	if ($dateFinish != null) {
+		$result = validateDate($dateFinish);
+		if (!$result) {
+			echo "Finish date not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Finish date not received";
+		exit;
+	}
+} else {
+	echo "Start date not posted"; 
+	exit;
+	}
+	
+	/* check the Start time */
+	if (isset($_POST['tstart'])) {
+		$timeStart = $_POST['tstart'];
+	/* 	check the "timeStart" */
+	if ($timeStart != null) {
+		$result = validateTime($timeStart);
+		if (!$result) {
+			echo "Start time not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Start time not received";
+		exit;
+	}
+} else {
+	echo "Start time not posted"; 
+	exit;
+	}
+	
+	/* check the Finish time */
+	if (isset($_POST['tfinish'])) {
+		$timeFinish = $_POST['tfinish'];
+	/* 	check the "timeFinish" */
+	if ($timeFinish != null) {
+		$result = validateTime($timeFinish);
+		if (!$result) {
+			echo "Finish time not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Finish time not received";
+		exit;
+	}
+} else {
+	echo "Finish time not posted"; 
+	exit;
+	}
+	
+	/* check the registered players
+	- if number not received then set as null */
+	if (isset($_POST['reg_players'])) {
+		$regPlayers = $_POST['reg_players'];
+	/* check the "regPlayers" */
+	if ($regPlayers != null) {
+		$result = is_numeric($regPlayers);
+		if (!$result) {
+			echo "Registered players number not valid.";
+			exit;
+		} else {	}
+	} else {
+		$regPlayers = null;
+	}
+} else {
+	$regPlayers = null;
+	}
+	/* Validation complete */
+
+// Connect to the database
+$conn = connect_db($host,$uid,$pwd,$database);
+
+/* prepare statement */
+if ($stmt = $conn->prepare("INSERT INTO "."$table4"
+							." ( _event_name, _venue, _date_start, _date_finish,
+								_time_start, _time_finish, _boardgameID, _registered_players ) "
+							."VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )"))
+							{
+								/* Bind the params */
+								$stmt->bind_param("ssssssii", $event, $venue, $dSt, $dFn,
+													$tSt, $tFn, $bID, $reg);
+								
+								$event = $eventName;
+								$venue = $venueName;
+								$dSt = $dateStart;
+								$dFn = $dateFinish;
+								$tSt = $timeStart.':00';
+								$tFn = $timeFinish.':00';
+								$bID = $boardGame;
+								$reg = $regPlayers;
+								
+								/* execute the statement */
+								$stmt->execute();
+								
+								/*Close the statement */
+								$stmt->close();
+								header('Location: tables.php?schedule');
+							}
+							else 
+							{
+								echo "Prepared Statement error: %s\n". $conn->error;
+							}
+/* close the connection */
+$conn->close();	
 	
 }
 

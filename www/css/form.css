@@ -41,18 +41,31 @@ input[type=submit] {
 	cursor:pointer;
 }
 
-input[type=checkbox] {
+input[type=checkbox], [type=date], [type=time] {
 	float: right;
+	
 }
 
 select {
-	float: right;}
+	float: right;
 }
 
 #max_players {
 	float: right;
 	
 }
+
+#date {
+	
+	text-align: right;
+}
+
+#time {
+	text-align:right;
+	
+	
+}
+
 
 input[type=number] {
 	
