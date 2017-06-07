@@ -406,10 +406,254 @@ $conn->close();
 /* Assign a player to game */
 if (isset($_GET['assign'])) {
 	
+	/* validate posted variables and perform the sql insert */
+	
+	/* check the event value */
+	if (isset($_POST['event'])) {
+		$eventID = $_POST['event'];
+	/* 	check the "eventID" */
+	if ($eventID != null) {
+		$result = is_numeric($eventID);
+		if (!$result) {
+			echo "eventID not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "eventID not received";
+		exit;
+	}
+} else {
+	echo "eventID not posted"; 
+	exit;
+	}
+	
+	/* check the member value */
+	if (isset($_POST['member'])) {
+		$memberID = $_POST['member'];
+	/* 	check the "memberID" */
+	if ($memberID != null) {
+		$result = is_numeric($memberID);
+		if (!$result) {
+			echo "memberID not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "memberID not received";
+		exit;
+	}
+} else {
+	echo "memberID not posted"; 
+	exit;
+	}
+	
+	/* check the notes .. remove possiblity of SQL injection before validation */
+	if (isset($_POST['notes'])) {
+		$notes = htmlspecialchars($_POST['notes']);
+	/* 	check the "venueName" */
+	if ($notes != null || $notes != "") {
+		$result = checkNotes($notes);
+		if (!$result) {
+			echo "Notes not valid.";
+			exit;
+		} else {	}
+	} else {
+		// not essential sql input so can avoid error here.
+		$notes = null;
+	}
+} else {
+	// not essential sql input so can avoid error here.
+	$notes = null;
+	}
+	
+	/* check the position
+	- if number not received then set as null */
+	if (isset($_POST['position'])) {
+		$position = $_POST['position'];
+	/* check the "position" */
+	if ($position != null) {
+		$result = is_numeric($position);
+		if (!$result) {
+			echo "Position number not valid.";
+			exit;
+		} else {	}
+	} else {
+		// not essential for sql input, so can avoid error here.
+		$postion = null;
+	}
+} else {
+	// not essential for sql input, so can avoid error here.
+	$postion = null;
+	}
+	
+	/* check the date */
+	if (isset($_POST['date'])) {
+		$date = $_POST['date'];
+	/* 	check the "date" */
+	if ($date != null) {
+		$result = validateDate($date);
+		if (!$result) {
+			echo "Date not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Date not received";
+		exit;
+	}
+} else {
+	echo "Date not posted"; 
+	exit;
+	}
+	
+	/* Validation complete, Insert the data */
+	
+// Connect to the database
+$conn = connect_db($host,$uid,$pwd,$database);
+
+/* prepare statement */
+if ($stmt = $conn->prepare("INSERT INTO "."$table3"
+							." ( _eventID, _memberID, _position, _notes, _date ) "
+							."VALUES ( ?, ?, ?, ?, ? )"))
+							{
+								/* Bind the params */
+								$stmt->bind_param("iiiss", $event, $member, $pos, $n, $dt);
+										
+								$event = $eventID;
+								$member = $memberID;
+								$pos = $position;
+								$n = $notes;
+								$dt = $date;
+								
+								/* execute the statement */
+								$stmt->execute();
+								
+								/*Close the statement */
+								$stmt->close();
+								header('Location: tables.php?assign');
+							}
+							else 
+							{
+								echo "Prepared Statement error: %s\n". $conn->error;
+							}
+/* close the connection */
+$conn->close();	
+	
 }
 
 /* Add score to table */
-if (isset($_GET['score'])) {
+if (isset($_GET['scores'])) {
+	
+	/* validate posted variables and perform the sql insert */
+	
+	/* check the event value */
+	if (isset($_POST['event'])) {
+		$eventID = $_POST['event'];
+	/* 	check the "eventID" */
+	if ($eventID != null) {
+		$result = is_numeric($eventID);
+		if (!$result) {
+			echo "eventID not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "eventID not received";
+		exit;
+	}
+} else {
+	echo "eventID not posted"; 
+	exit;
+	}
+	
+	/* check the member value */
+	if (isset($_POST['member'])) {
+		$memberID = $_POST['member'];
+	/* 	check the "memberID" */
+	if ($memberID != null) {
+		$result = is_numeric($memberID);
+		if (!$result) {
+			echo "memberID not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "memberID not received";
+		exit;
+	}
+} else {
+	echo "memberID not posted"; 
+	exit;
+	}
+	
+	/* check the current score .. this is essential for sql */
+	if (isset($_POST['curscore'])) {
+		$curScore = ($_POST['curscore']);
+	/* 	check the "curScore" */
+	if ($curScore != null || $curScore != "") {
+		$result = is_numeric($curScore);
+		if (!$result) {
+			echo "Current score not valid.";
+			exit;
+		} else {	}
+	} else {
+		echo "Current score not received";
+		exit;
+	}
+} else {
+	echo "Current score not posted";
+	exit;
+	}
+	
+	/* check the final score
+	- if number not received then set as null */
+	if (isset($_POST['finscore'])) {
+		$finScore = $_POST['finscore'];
+	/* check the "finScore" */
+	if ($finScore != null || $finScore != "") {
+		$result = is_numeric($finScore);
+		if (!$result) {
+			echo "Final score number not valid.";
+			exit;
+		} else {	}
+	} else {
+		// not essential for sql input, so can avoid error here.
+		$finScore = null;
+	}
+} else {
+	// not essential for sql input, so can avoid error here.
+	$finScore = null;
+	}
+	
+	
+	/* Validation complete, Insert the data */
+	
+// Connect to the database
+$conn = connect_db($host,$uid,$pwd,$database);
+
+/* prepare statement */
+if ($stmt = $conn->prepare("INSERT INTO "."$table5"
+							." ( _eventID, _memberID, _current_score, _final_score ) "
+							."VALUES ( ?, ?, ?, ? )"))
+							{
+								/* Bind the params */
+								$stmt->bind_param("iiii", $event, $member, $cur, $fin);
+										
+								$event = $eventID;
+								$member = $memberID;
+								$cur = $curScore;
+								$fin = $finScore;
+		
+								
+								/* execute the statement */
+								$stmt->execute();
+								
+								/*Close the statement */
+								$stmt->close();
+								header('Location: tables.php?scores');
+							}
+							else 
+							{
+								echo "Prepared Statement error: %s\n". $conn->error;
+							}
+/* close the connection */
+$conn->close();	
 	
 }
 

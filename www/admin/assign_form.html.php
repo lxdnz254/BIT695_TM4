@@ -53,13 +53,15 @@
 			</td>
 		</tr>
 
-		<!-- Textbox for notes  -->
+		<!-- Textbox for notes - Only needs validating if written in -->
 		<tr>
 			<td id="form_text">Notes:</td>
 			<td> 
 				<input type="textbox" name="notes" id="notes" 
 						value="{{notes}}" rows="4" cols="50"
-						placeholder="Write notes about the game" tabindex="7"/>
+						placeholder="Write notes about the game" 
+						title="Must contain letters, numbers or common sentence symbols" 
+						pattern = "^[0-9a-zA-Z\s\_\,\.\?\!]+$" tabindex="7"/>
 			</td>
 		</tr>
 			

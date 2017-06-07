@@ -36,4 +36,9 @@ function validateTime($time)
     return $t && $t->format($format) == $time;
 }
 
+function checkNotes($note)
+{
+	return preg_match("/^[0-9a-zA-Z\s\_\,\.\?\!]+$/", $note);
+}
+
 ?>
