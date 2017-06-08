@@ -37,19 +37,21 @@
 				<select name="owner" id="owner" tabindex="5"/>
 				
 					<?php foreach ($players as $player): ?>
-					<option value="<?php htmlout($player['id']); ?>"><?php htmlout($player['name']); ?></option>
+					<option value="<?php htmlout($player['id']); ?>" <?php 
+						if ($player['id'] == {{id}}) {?> selected="selected" <?php } ?>
+							><?php htmlout($player['name']); ?></option>
 					<?php endforeach; ?>
 				</select>
 				
 			</td>
 		</tr>
 
-		<!-- Checkbox is checked to inidicate the game is being played currently  -->
+		<!-- Checkbox is checked to indicate the game is being played currently  -->
 		<tr>
 			<td id="form_text">Playing:</td>
 			<td> 
 				<input type="checkbox" name="playing" id="playing" 
-						value="0" 
+						value="0" <?php if ({{playing}}  == 1) {?> checked="checked" <?php }?>
 						placeholder="Check if game is in play" tabindex="6"/>
 			</td>
 		</tr>
@@ -58,7 +60,7 @@
 		<tr>
 			<td id="form_text">Maximum players:</td>
 			<td> 
-				<input type="number" name="max_players" id="max_players" size="5" min="2" max="20" 
+				<input type="number" name="max_players" id="max_players" size="5" value="{{v}}" min="2" max="20" 
 					 tabindex="7"/>
 			</td>
 		</tr>

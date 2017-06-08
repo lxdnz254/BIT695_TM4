@@ -1,14 +1,17 @@
 <?php
+/*  ensure text doesnot get code injection */
 function html($text)
 {
 	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 }
 
+/* Output html to text */
 function htmlout($text)
 {
 	echo html($text);
 }
 
+/* Convert from markdown to html */
 function markdown2html($text)
 {
 	$text = html($text);
@@ -41,7 +44,54 @@ function markdown2html($text)
 	return $text;
 }
 
+/* Markdown to text function */
 function markdownout($text)
 {
 	echo markdown2html($text);
 }
+
+/* Replace {{tags}} in html form */
+function replace_tags($template, $placeholders){
+    	
+    return str_replace(array_keys($placeholders), $placeholders, $template);
+}
+
+/* Prepare statements for all tables */
+function statement_prep($connection, $sql) {
+	
+	if($stmt = $connection->prepare($sql)) {
+		
+		/*No Bind params */
+		
+		/*execute statement*/
+		$stmt->execute();
+		
+		/*get result*/
+		$result=$stmt->get_result();
+		
+		$stmt->close();
+		
+	} else {
+			$result=null;
+			echo 'Prepared statement error: %s\n'. $connection->error;
+	}
+	
+	return $result;
+}
+
+/* stores a temporary file on users device */
+function temporaryFile($name, $content)
+{
+    $file = trim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) .
+            DIRECTORY_SEPARATOR .
+            ltrim($name, DIRECTORY_SEPARATOR);
+
+    file_put_contents($file, $content);
+
+    register_shutdown_function(function() use($file) {
+        unlink($file);
+    });
+
+    return $file;
+}
+

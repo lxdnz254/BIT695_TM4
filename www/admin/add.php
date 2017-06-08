@@ -313,11 +313,12 @@ if (isset($_GET['event'])) {
 		$timeStart = $_POST['tstart'];
 	/* 	check the "timeStart" */
 	if ($timeStart != null) {
-		$result = validateTime($timeStart);
+		$timeStartCheck = date("H:i:s", strtotime($timeStart)); 
+		$result = validateTime($timeStartCheck);
 		if (!$result) {
 			echo "Start time not valid.";
 			exit;
-		} else {	}
+		} else {$timeStart = $timeStartCheck;	}
 	} else {
 		echo "Start time not received";
 		exit;
@@ -332,11 +333,12 @@ if (isset($_GET['event'])) {
 		$timeFinish = $_POST['tfinish'];
 	/* 	check the "timeFinish" */
 	if ($timeFinish != null) {
-		$result = validateTime($timeFinish);
+		$timeFinishCheck = date("H:i:s", strtotime($timeFinish));
+		$result = validateTime($timeFinishCheck);
 		if (!$result) {
 			echo "Finish time not valid.";
 			exit;
-		} else {	}
+		} else {$timeFinish = $timeFinishCheck;	}
 	} else {
 		echo "Finish time not received";
 		exit;
@@ -382,8 +384,8 @@ if ($stmt = $conn->prepare("INSERT INTO "."$table4"
 								$venue = $venueName;
 								$dSt = $dateStart;
 								$dFn = $dateFinish;
-								$tSt = $timeStart.':00';
-								$tFn = $timeFinish.':00';
+								$tSt = $timeStart;
+								$tFn = $timeFinish;
 								$bID = $boardGame;
 								$reg = $regPlayers;
 								

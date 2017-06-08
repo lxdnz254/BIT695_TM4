@@ -5,7 +5,14 @@ include('connect.php');
 if (isset($_GET['player'])) { 
 
 	// get the passed variable(s)
-	$id = $_GET['id'];
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+	else {
+		echo "on Delete Player ID not received";
+		exit;
+	}
+	
 	// Connect to the database
 	$conn=connect_db($host,$uid,$pwd,$database);
 	$sql= "DELETE FROM {$table1} WHERE _memberID = ?";
@@ -65,7 +72,14 @@ if (isset($_GET['game'])) {
 if (isset($_GET['event'])) { 
 
 	// get the passed variable(s)
-	$id = $_GET['id'];
+	if (isset($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+	else {
+		echo "On Delete eventID not received";
+		exit;
+	}
+	
 	// Connect to the database
 	$conn=connect_db($host,$uid,$pwd,$database);
 	$sql= "DELETE FROM {$table4} WHERE _eventID = ?";
@@ -95,15 +109,21 @@ if (isset($_GET['event'])) {
 if (isset($_GET['assign'])) { 
 
 	// get the passed variable(s)
-	$id = $_GET['id'];
+	if (isset($_GET['mid'])) {
+		$mID = $_GET['mid'];
+	}
+	if (isset($_GET['eid'])) {
+		$eID = $_GET['eid'];
+	}
 	// Connect to the database
 	$conn=connect_db($host,$uid,$pwd,$database);
-	$sql= "DELETE FROM {$table3} WHERE _memberID = ?";
+	$sql= "DELETE FROM {$table3} WHERE _memberID = ? AND _eventID = ?";
 	
 	if ($stmt = $conn->prepare($sql)) {
 		/*Bind value */
-		$stmt->bind_param("i", $bindID);
-		$bindID = $id;
+		$stmt->bind_param("ii", $memberID, $eventID);
+		$memberID = $mID;
+		$eventID = $eID;
 		$stmt->execute();
 		$del_result = $stmt->affected_rows;
 		$stmt->close();
@@ -125,15 +145,22 @@ if (isset($_GET['assign'])) {
 if (isset($_GET['score'])) { 
 
 	// get the passed variable(s)
-	$id = $_GET['id'];
+	if (isset($_GET['mid'])) {
+		$mID = $_GET['mid'];
+	}
+	if (isset($_GET['eid'])) {
+		$eID = $_GET['eid'];
+	}
+		
 	// Connect to the database
 	$conn=connect_db($host,$uid,$pwd,$database);
-	$sql= "DELETE FROM {$table5} WHERE _memberID = ?";
+	$sql= "DELETE FROM {$table5} WHERE _memberID = ? AND _eventID = ?";
 	
 	if ($stmt = $conn->prepare($sql)) {
 		/*Bind value */
-		$stmt->bind_param("i", $bindID);
-		$bindID = $id;
+		$stmt->bind_param("ii", $memberID, $eventID);
+		$memberID = $mID;
+		$eventID = $eID;
 		$stmt->execute();
 		$del_result = $stmt->affected_rows;
 		$stmt->close();

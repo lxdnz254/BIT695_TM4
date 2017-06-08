@@ -1,48 +1,6 @@
 <?php
 
-function replace_tags($template, $placeholders){
-    	
-    return str_replace(array_keys($placeholders), $placeholders, $template);
-}
-
-/* Prepare stements for all tables */
-function statement_prep($connection, $sql) {
-	
-	if($stmt = $connection->prepare($sql)) {
-		
-		/*No Bind params */
-		
-		/*execute statement*/
-		$stmt->execute();
-		
-		/*get result*/
-		$result=$stmt->get_result();
-		
-		$stmt->close();
-		
-	} else {
-			$result=null;
-			echo 'Prepared statement error: %s\n'. $connection->error;
-	}
-	
-	return $result;
-}
-
-/* stores a temporary file on users device */
-function temporaryFile($name, $content)
-{
-    $file = trim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) .
-            DIRECTORY_SEPARATOR .
-            ltrim($name, DIRECTORY_SEPARATOR);
-
-    file_put_contents($file, $content);
-
-    register_shutdown_function(function() use($file) {
-        unlink($file);
-    });
-
-    return $file;
-}
+include_once('../includes/helpers.inc.php');
 
 /* Get player form */
 if (isset($_GET['player'])) {
@@ -87,6 +45,9 @@ if (isset($_GET['games'])) {
 
 	/*create the output from the template */
 	$vars = array('{{game}}'=>'',
+				'{{id}}'=>'1',
+				'{{playing}}'=>'0',
+				'{{v}}'=>'2',
 				'{{Register}}'=>'Add Game',
 				'{{action}}'=>'add.php?games');
 					
@@ -129,10 +90,12 @@ if (isset($_GET['event'])) {
 	/*create the output from the template */
 	$vars = array('{{event}}'=>'',
 				'{{venue}}'=>'',
+				'{{id}}'=>'1',
 				'{{dstart}}'=>'2017-06-01',
 				'{{tstart}}'=>'12:00',
 				'{{dfinish}}'=>'2017-06-01',
 				'{{tfinish}}'=>'12:00',
+				'{{reg}}'=>'',
 				'{{Register}}'=>'Add Event',
 				'{{action}}'=>'add.php?event');
 					
@@ -194,6 +157,8 @@ if (isset($_GET['assign'])) {
 	/*create the output from the template */
 	$vars = array('{{notes}}'=>'',
 				'{{position}}'=>'',
+				'{{eid}}'=>'1',
+				'{{pid}}'=>'1',
 				'{{date}}'=>'2017-06-01',
 				'{{Register}}'=>'Assign Player',
 				'{{action}}'=>'add.php?assign');
@@ -254,6 +219,8 @@ if (isset($_GET['scores'])) {
 	/*create the output from the template */
 	$vars = array('{{curscore}}'=>'',
 				'{{finscore}}'=>'',
+				'{{eid}}'=>'1',
+				'{{pid}}'=>'1',
 				'{{Register}}'=>'Add Score',
 				'{{action}}'=>'add.php?scores');
 					

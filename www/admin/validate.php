@@ -31,7 +31,7 @@ function validateDate($date)
 
 function validateTime($time) 
 {
-	$format = 'H:i';
+	$format = 'H:i:s';
 	$t = DateTime::createFromFormat($format, $time);
     return $t && $t->format($format) == $time;
 }

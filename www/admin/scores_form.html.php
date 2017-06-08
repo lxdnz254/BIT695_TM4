@@ -27,7 +27,9 @@
 				<select name="event" id="event" tabindex="4"/>
 				
 					<?php foreach ($events as $event): ?>
-					<option value="<?php htmlout($event['id']); ?>"><?php htmlout($event['event']); ?></option>
+					<option value="<?php htmlout($event['id']); ?>" <?php 
+						if ($event['id'] == {{eid}}) {?> selected="selected" <?php } ?>
+						><?php htmlout($event['event']); ?></option>
 					<?php endforeach; ?>
 				</select>
 			</td>
@@ -39,7 +41,9 @@
 				<select name="member" id="member" tabindex="5"/>
 				
 					<?php foreach ($players as $player): ?>
-					<option value="<?php htmlout($player['id']); ?>"><?php htmlout($player['name']); ?></option>
+					<option value="<?php htmlout($player['id']); ?>" <?php 
+						if ($player['id'] == {{pid}}) {?> selected="selected" <?php } ?>
+						><?php htmlout($player['name']); ?></option>
 					<?php endforeach; ?>
 				</select>
 			</td>

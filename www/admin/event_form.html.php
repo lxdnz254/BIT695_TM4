@@ -48,7 +48,9 @@
 				<select name="boardgame" id="games" tabindex="6"/>
 				
 					<?php foreach ($games as $game): ?>
-					<option value="<?php htmlout($game['id']); ?>"><?php htmlout($game['game']); ?></option>
+					<option value="<?php htmlout($game['id']); ?>" <?php 
+						if ($game['id'] == {{id}}) {?> selected="selected" <?php } ?>
+						><?php htmlout($game['game']); ?></option>
 					<?php endforeach; ?>
 				</select>
 				
@@ -99,7 +101,7 @@
 		<tr>
 			<td id="form_text">Registered players:</td>
 			<td> 
-				<input type="number" name="reg_players" id="max_players" size="5" min="0" max="20" 
+				<input type="number" name="reg_players" id="max_players" value="{{reg}}" size="5" min="0" max="20" 
 					 tabindex="11"/>
 			</td>
 		</tr>

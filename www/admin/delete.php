@@ -109,7 +109,7 @@ if (isset($_GET['events'])) {
 		echo '<input type="button" name="yes" value="Yes"></a>';	
 		echo '</td><td width=15% align=middle>';
 		// return to player table with no delete
-		echo '<a href="tables.php?events">';
+		echo '<a href="tables.php?schedule">';
 		echo '<input type="button" name="no" value="No"></a></td>';
 	} else {
 		echo "Could not find game on database table";
@@ -155,14 +155,20 @@ if (isset($_GET['assign'])) {
 }
 
 if (isset($_GET['scores'])) {
-	// get the passed variable
-	$id=$_GET['scores'];
+	// get the passed variables
+	if (isset($_GET['member'])) {
+	$mID = $_GET['scores'];
+	}
+	
+	if (isset($_GET['event'])) {
+		$eID = $_GET['event'];
+	}		
 	// connect to the database
 	$conn=connect_db($host,$uid,$pwd,$database);
 	$sql = "SELECT t.*, p._first_name, p._family_name 
 		FROM {$table5} t 
 		INNER JOIN {$table1} p ON p._memberID = t._memberID
-		WHERE t._memberID = {$id}";
+		WHERE t._memberID = {$mID} AND t._eventID = {$eID}";
 	
 	$result = statement_prep($conn, $sql);
 	
@@ -175,7 +181,7 @@ if (isset($_GET['scores'])) {
 		echo '<p></p>';
 		echo '<td width=15% align=middle>';
 		// pass _memberID to actual delete action 
-		echo '<a href="do_delete.php?score&id='.$row['_memberID'].'">';
+		echo '<a href="do_delete.php?score&mid='.$row['_memberID'].'&eid='.$row['_eventID'].'">';
 		echo '<input type="button" name="yes" value="Yes"></a>';	
 		echo '</td><td width=15% align=middle>';
 		// return to player table with no delete

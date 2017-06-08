@@ -8,8 +8,8 @@ echo '<table><thead>';
 		echo '</td><td data-label="Name">' . $row['_first_name'] . ' ' . $row['_family_name'];
 		echo '</td><td data-label="Score">' . $row['_current_score'];
  		echo '</td><td data-label="Final">' . $row['_final_score'];
- 		echo '</td><td id="do"><a href="delete.php?scores=' . $row['_memberID'] . '">Delete Player</a>';
- 		echo '</td><td id="do"><a href="edit.php?scores=' . $row['_memberID'] . '">Edit Player</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?scores&member=' . $row['_memberID'] . '&event=' . $row['_eventID'] . '">Delete Player</a>';
+ 		echo '</td><td id="do"><a href="edit.php?scores&member=' . $row['_memberID'] . '&event=' . $row['_eventID'] . '">Edit Player</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';

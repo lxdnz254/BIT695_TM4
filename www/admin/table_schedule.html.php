@@ -10,8 +10,8 @@ echo '<table><thead>';
  		echo '</td><td data-label="Finish">' . timeset($row['_date_finish'], $row['_time_finish']);
 		echo '</td><td data-label="Game">' . $row['_boardgame'];
 		echo '</td><td data-label="Entered">' . $row['_registered_players'];
- 		echo '</td><td id="do"><a href="delete.php?event=' . $row['_eventID'] . '">Delete Event</a>';
- 		echo '</td><td id="do"><a href="edit.php?event=' . $row['_eventID'] . '">Edit Event</a>'; 
+ 		echo '</td><td id="do"><a href="delete.php?events=' . $row['_eventID'] . '">Delete Event</a>';
+ 		echo '</td><td id="do"><a href="edit.php?events=' . $row['_eventID'] . '">Edit Event</a>'; 
  		echo '</td></tr>';
  	}
 	echo '<tr>';
