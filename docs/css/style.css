@@ -292,6 +292,11 @@ footer{
 	bottom: -10px;
 }
 
+footer p{
+	text-align:center;
+}
+
+
 /* When screen is smaller than 769px wide */
 
 @media screen and (max-width: 769px) {
@@ -405,6 +410,11 @@ footer{
 	footer{
 		position:relative;
 		bottom: -75px;
+		height: 15%;
+	}
+	
+	footer p{
+		text-align: center;
 	}
 
 }	
@@ -567,7 +577,7 @@ footer{
 		position: relative;
 		text-align: center;
 		left: -20%;
-		top: 40px;
+		top: 20px;
 	}
 	
 	#heading{
@@ -610,10 +620,16 @@ footer{
 	footer{
 		position: absolute;
 		width: 400%;
-		bottom: -10%;
-		left: -300%;
-		height: 10%;
 		
+		left: -300%;
+		height: 15%;
+		
+	}
+	
+	#pfoot{
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
 	}
 	
 	#admin_foot{
@@ -635,10 +651,29 @@ footer{
 	
 }
 
+@media screen and (min-width: 769px) and (max-width: 1279px) {
+	
+	nav {
+		top: 263px;
+	}
+	
+	footer {
+		height: 15%;
+	}
+	
+}
+
+@media screen and (max-width: 361px) {
+	
+	nav {
+		top: 95px;
+	}
+}
+
 @media screen and (min-width: 1280px) and (orientation: landscape) and (min-height: 800px) {
 		
 		footer{
-			height: 32%;
+			height: 35%;
 		}
 		
 		#admin_foot{
@@ -649,7 +684,7 @@ footer{
 @media screen and (min-width: 1280px) and (orientation: landscape) and (min-height: 950px) {
 		
 		footer{
-			height: 44%;
+			height: 46%;
 		}
 		
 		#admin_foot{
@@ -658,11 +693,21 @@ footer{
 		}
 }
 
+@media screen and (min-width: 1280px) {
+	
+	footer{
+		height: 30%;
+		text-align: center;
+		
+	}
+	
+}
+
 /* screen above 1500px */
 @media screen and (min-width: 1500px) {
 	
 	footer{
-		height: 30%;
+		height: 40%;
 	}
 	#admin_foot{
 		height: 30%;
@@ -673,7 +718,7 @@ footer{
 @media screen and (min-width: 1900px) {
 	
 	footer{
-		height: 40%;
+		height: 44%;
 	}
 	#admin_foot{
 		height: 35%;
