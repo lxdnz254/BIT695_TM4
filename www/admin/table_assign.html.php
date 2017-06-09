@@ -9,7 +9,7 @@ echo '<table><thead>';
 		echo '</td><td data-label="Position">' . $row['_position'];
  		echo '</td><td data-label="Date">' . $row['_date'];
 		echo '</td><td data-label="Notes">' . $row['_notes'];
- 		echo '</td><td id="do"><a href="delete.php?assign$member=' . $row['_memberID'] . '&event=' . $row['_eventID'] . '">Delete Player</a>';
+ 		echo '</td><td id="do"><a href="delete.php?assign&member=' . $row['_memberID'] . '&event=' . $row['_eventID'] . '">Delete Player</a>';
  		echo '</td><td id="do"><a href="edit.php?assign&member=' . $row['_memberID'] . '&event=' . $row['_eventID'] . '">Edit Player</a>'; 
  		echo '</td></tr>';
  	}

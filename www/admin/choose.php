@@ -23,14 +23,14 @@ include_once('connect.php');
 		}
 		
 	// Second sql array
-	$sql = "SELECT _boardgameID, _boardgame FROM {$table2}";
+	$sql = "SELECT _eventID, _event_name FROM {$table4}";
 
 	$result = statement_prep($conn, $sql);
 	
 	if ($result->num_rows > 0) {
 		
 		foreach($result as $row) {
-			$games[] = array('id' => $row['_boardgameID'], 'game' => $row['_boardgame']);
+			$events[] = array('id' => $row['_eventID'], 'event' => $row['_event_name']);
 		}
 		
 	} else {
@@ -38,16 +38,49 @@ include_once('connect.php');
 		exit();
 		}
 		
+	// Recieve the assign posts
+if (isset($_GET['assign'])) {
+	
+	if (isset($_POST['player'])) {
+		$memberID = $_POST['player'];
+	}
+	
+	// get the checked events
+	foreach ($events as $event){
 		
-	$conn->close();
+		if (isset($_POST['check'.$event['id']])) {
+			$checkedArray[] = array('checked' => $event['id']);
+		}	
+	}
+	
+	foreach ($checkedArray as $eventID) {
+		// check if already assigned
+		$sql = "SELECT _memberID, _eventID FROM {$table3}"
+				." WHERE _memberID={$memberID} AND _eventID={$eventID['checked']}";
+		$result = statement_prep($conn, $sql);
+		
+		if ($result->num_rows == 0) {
+			//add the assigned event to member
+			$sql = "INSERT INTO {$table3} ( _memberID, _eventID ) VALUES ({$memberID}, {$eventID['checked']})";
+			// no result returned for INSERT
+			statement_prep($conn, $sql);
+		}
+		
+	}
+	
+}
+
+$conn->close();
 
 ?>
 <html>
-	<table>
+	<body>
+	<form id="form-box" method="POST" enctype="application/x-www-form-urlencoded" action="choose.php?assign"  target="_self">
+	<table style="margin:0px auto; width:75%;">
 		<thead>
 			<tr>
 				<th>Player Select</th>
-				<th>Assign Games</th>
+				<th>Assign Events</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,19 +92,25 @@ include_once('connect.php');
 					<?php endforeach; ?>
 					</select>
 				</td>
-				<?php foreach ($games as $game): ?>
-				<td><?php htmlout($game['game']); ?></td>
-				<td><input type="checkbox" value="<?php htmlout($game['id']); ?>"></td></tr><td></td>
+				<?php foreach ($events as $event): ?>
+				<td><?php htmlout($event['event']); ?></td>
+				<td><input type="checkbox" name="check<?php htmlout($event['id']); ?>"></td></tr><td></td>
 				<?php endforeach; ?>
 			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="3">
-					<input type="submit" value="Assign Games">
+				<td></td>
+				<td>
+					<p id="register">
+					<input type="submit" value="Assign Events" style="margin:1px auto; width: 100%;">
+					</p>
 				</td>
 			</tr>
 	</table>
+	</form>
+	</body>
 
 
 </html>
+
