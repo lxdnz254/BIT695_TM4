@@ -53,6 +53,8 @@ if (isset($_GET['assign'])) {
 		}	
 	}
 	
+	$confirmString = 'choose.php?confirm&mid='.$memberID;
+	
 	foreach ($checkedArray as $eventID) {
 		// check if already assigned
 		$sql = "SELECT _memberID, _eventID FROM {$table3}"
@@ -64,16 +66,74 @@ if (isset($_GET['assign'])) {
 			$sql = "INSERT INTO {$table3} ( _memberID, _eventID ) VALUES ({$memberID}, {$eventID['checked']})";
 			// no result returned for INSERT
 			statement_prep($conn, $sql);
-		}
+			$confirmString .= '&check'.$eventID['checked'].'=on';
+			}
 		
 	}
+	header('Location: '.$confirmString);
 	
+}
+
+// Build a confirmation output
+if (isset($_GET['confirm'])) {
+	
+	// Get the player ID
+	if (isset($_GET['mid'])) {
+		$memberID = $_GET['mid'];
+	}
+	
+	$checkCount = 0;
+	// get the checked events
+	foreach ($events as $event){
+		
+		if (isset($_GET['check'.$event['id']])) {
+			$checkedArray[] = array('checked' => $event['id']);
+			$checkCount++;
+		}	
+	}
+	
+	// Get player name from ID and start building string
+	$name = $players[$memberID - 1]['name'];
+	$output = $name; 
+	$output .= ' has been assigned to ';
+	
+	if ($checkCount > 0) {
+		
+		foreach ($checkedArray as $eventID) {
+			
+			$sql = "SELECT _event_name FROM {$table4} WHERE _eventID={$eventID['checked']}";
+			$result = statement_prep($conn, $sql);
+			
+			if ($result->num_rows > 0) {
+				
+				foreach($result as $row) {
+					$output .= $row['_event_name'].', ';
+				}
+				
+			} else {
+				echo "Error getting database information";
+				exit();
+			}
+		}
+		$output .= 'press OK to continue.';
+	} else {
+		$output .= 'no new events!';
+	}
+	
+	header('Location: confirm.php?output='.$output);
 }
 
 $conn->close();
 
 ?>
 <html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="../css/form.css">
+		
+
+	</head>
 	<body>
 	<form id="form-box" method="POST" enctype="application/x-www-form-urlencoded" action="choose.php?assign"  target="_self">
 	<table style="margin:0px auto; width:75%;">
