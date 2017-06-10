@@ -500,7 +500,21 @@ footer{
 		
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 361px) {
+	
+	nav li {
+		padding: 5px 0px 5px 0px;
+		
+	}
+	
+	nav a {
+		font-size: 10px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 3px;
+		padding-right: 3px;
+		
+	}
 	
 	#admin_nav {
 		left: -40px;
